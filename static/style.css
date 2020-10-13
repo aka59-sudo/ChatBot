@@ -22,3 +22,7 @@ li{
   margin:0 auto;
   border-radius: 25px;
 }
+
+[id="Chat Bot (C.B.)"]{
+  color: firebrick;
+}

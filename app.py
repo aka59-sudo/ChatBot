@@ -10,7 +10,6 @@ import json
 import requests
 
 
-
 MESSAGES_RECEIVED_CHANNEL = 'messages received'
 
 app = flask.Flask(__name__)
@@ -39,6 +38,11 @@ db.session.commit()
 
 
 connects = 0
+
+def botChatCommit(text):
+    db.session.add(models.Chats("Chat Bot (C.B.)", text));
+    db.session.commit();
+
 def connections(value):
     global connects
     if(value == 1):
@@ -61,7 +65,8 @@ def bot_call(botfun, request):
         funtrans = json_body["contents"]
         
         text = "In a {} it looks something like this: {}".format(funtrans["translation"],funtrans["translated"])
-    
+        
+        botChatCommit(text)
     
     elif(botfun == "!! slangcipher "):
         word = request.lstrip("!! slangcipher ")
@@ -82,6 +87,8 @@ def bot_call(botfun, request):
         definition = json_body["list"][1]["definition"]
         
         text = "{}".format(definition)
+        
+        botChatCommit(text)
     
     elif(botfun == "!! joke"):
         url = "https://rapidapi.p.rapidapi.com/random/joke"
@@ -97,15 +104,30 @@ def bot_call(botfun, request):
         joke = json_body["body"][0]
         
         text =joke["setup"]
-        socketio.emit("bot call", {
-        "action": botfun,
-        "response": text
-        })
+        botChatCommit(text)
         
         text = joke["punchline"]
+        botChatCommit(text)
         
+    elif(botfun == "!! about"):
+        text = "Hello there, My name is Chat Bot. People call me C.B for short. \
+            Enjoy your chat and use this resource responsibly. For more info \
+            on the things that I can do enter *!! help*"
+        botChatCommit(text)
         
-       
+    elif(botfun == "!! help"):
+        text = "Howdy there, these are the commands at your disposal:" 
+        botChatCommit(text)
+        text = "<!! help> Shows the list of commands that I can handle. But you already know that :) (cont.)"
+        botChatCommit(text)
+        text = "<!! about> This command tells you a little bit about myself (cont.)"
+        botChatCommit(text)
+        text = "<!! joke> No one's talking? This command could help break the ice a little with some HILARIOUS jokes! (cont.)"
+        botChatCommit(text)
+        text = "<!! funtranslate> Wanna spice things up? This command whips a up a nifty translation of what you wrote. Remember to enter the text you want to translate after the command before hitting enter! (cont.)"
+        botChatCommit(text)
+        text = "<!! slangcipher> Did someone just use a slang that you don't know? Use this to help decipher that confusing puzzle. Remember to enter the slang or word after the command before hitting enter! (done)"
+        botChatCommit(text)
     socketio.emit("bot call", {
         "action": botfun,
         "response": text
@@ -170,6 +192,7 @@ def on_new_message(data):
             bot_call("unknown", '')
     
     emit_all_messages(MESSAGES_RECEIVED_CHANNEL)
+   
 
 @app.route('/')
 def index():

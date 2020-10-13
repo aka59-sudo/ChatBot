@@ -1,14 +1,27 @@
     
 import * as React from 'react';
 
-
 import { Button } from './Button';
 import { Socket } from './Socket';
+import { isBot } from './Bot';
 
 export function Content() {
+    const [botMess, setBotMess] = React.useState('')
     const [connections, setConnections] = React.useState(0);
     const [messages, setMessages] = React.useState([]);
     const [userID, setUserID] = React.useState([]);
+    
+    
+    function Bot() {
+        React.useEffect(() => {
+            Socket.on('bot call', isBot);
+            return () => {
+                Socket.off('bot call', isBot);
+            }
+        });
+    }
+    
+    
     
     function numConnections() {
         React.useEffect(() => {
@@ -43,18 +56,19 @@ export function Content() {
         setUserID(data['allUserID'])
     }
     
-    
+    Bot();
     getNewMessages();
     numConnections();
+    
 
     return (
         <div>
             <h1>Chat Room!</h1>
             <h3>Connected Users: {connections}</h3>
-                <ol>
+                <ol id="myList">
                     {   
                         messages.map(
-                        (message, index) => <li key={ index }>{userID[index]}: <b>{ message }</b></li>)
+                        (message, index) => <li id={ userID[index] } key={ index }>{userID[index]}: <b>{ message }</b></li>)
                     }
                 </ol>
             <Button />
