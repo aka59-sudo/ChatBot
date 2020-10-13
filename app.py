@@ -25,6 +25,8 @@ dictKey = os.environ["DICT_KEY"]
 
 database_uri = os.environ['DATABASE_URL']
 
+dadJokeKey = os.environ["JOKE_KEY"]
+
 app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
 
 db = flask_sqlalchemy.SQLAlchemy(app)
@@ -62,9 +64,7 @@ def bot_call(botfun, request):
     
     
     elif(botfun == "!! slangcipher "):
-        print("in DICT")
         word = request.lstrip("!! slangcipher ")
-        print("Word " + word)
         
         url = "https://rapidapi.p.rapidapi.com/define"
 
@@ -82,6 +82,27 @@ def bot_call(botfun, request):
         definition = json_body["list"][1]["definition"]
         
         text = "{}".format(definition)
+    
+    elif(botfun == "!! joke"):
+        url = "https://rapidapi.p.rapidapi.com/random/joke"
+
+        headers = {
+            'x-rapidapi-host': "dad-jokes.p.rapidapi.com",
+            'x-rapidapi-key': dadJokeKey
+            }
+        
+        response = requests.request("GET", url, headers=headers)
+        json_body = response.json()
+        
+        joke = json_body["body"][0]
+        
+        text =joke["setup"]
+        socketio.emit("bot call", {
+        "action": botfun,
+        "response": text
+        })
+        
+        text = joke["punchline"]
         
         
        
@@ -135,20 +156,17 @@ def on_new_message(data):
     db.session.add(models.Chats(data["userID"],data["message"]));
     db.session.commit();
     botCalls =["!! funtranslate ", "!! slangcipher "]
-    regbotCall = ["!! about", "!! help", "!! dadjoke"]
+    regbotCall = ["!! about", "!! help", "!! joke"]
     
     if(data["message"] in regbotCall):
         bot_call(data["message"], '')
     elif((data["message"][0] == '!') and (data["message"][1] == '!')):
-        print("IN CHECKER")
         tick = "out"
         for mess in botCalls:
             if(mess in data["message"]):
                 tick = "in"
-                print("Active")
                 bot_call(mess, data["message"])
         if(tick == "out"): 
-            print("IN  UNKNOWN")
             bot_call("unknown", '')
     
     emit_all_messages(MESSAGES_RECEIVED_CHANNEL)
