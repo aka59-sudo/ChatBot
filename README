@@ -117,15 +117,15 @@ To use this repository, you must follow these steps:
    chats
    
  
-3. Another issue that I am currently having is deploying my app to Heroku. I got an error along the lines of "the default language
-   can not be detected. I solved this issue by making sure that I had a Procfile and requirements.txt before pushing to heroku master
- 
+3. Another issue that I am currently having is deploying my app to Heroku. I got an error along the lines of "something is wrong with the buildpack.
+   I solved this issue by referring back to the lecture to find out that I had to kill the current build and restart it again.
+   
 4. The second issue that I had with Heroku was that the CONFIG VARS that I inputted in Heroku was not the same as the ones in the code.
    As a result Heroku kept crashing. By looking into the log I was able to find out where the error was occuring. Once I changed my VARS
    everything was dandy.
   
-5. For some reason I just started getting blank pages while reloading. If the page does not load there is a possibility that the quota for 
-   your spoonacular api has been reached. If that's the case what a while in order to have it load again. At max it should take a day.
+5. For some reason I just started getting blank pages while reloading. If the page does not load there is a possibility that there is a React issue.
+   I made sure to look at the console and actually read the errors that I was receiving. 
 
 6. I had issues referencing the pictures that I put in my static folder. I was able to solve this by making sure that when I reference pictures 
    I make sure they are referenced from where they are located exactly.
