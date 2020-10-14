@@ -65,9 +65,9 @@ To use this repository, you must follow these steps:
 4. Install flask using the same process as above ([sudo] pip[3] install flask)
 
 5. Add your secret keys into key.env and populate it as follows:
-   DATABASE_URL = "postgresql://{SQL_USER}:{SQL_PASSWORD}@localhost/postgres" //Fill in those variables with their respective values
-   DICT_KEY = '' {Sign up for Urban Dictionary at RapidAPI and subscribe }
-   JOKE_KEY=''   {Sign up for Dad Jokes at RapidAPI and subscribe }
+   DATABASE_URL = "postgresql://{SQL_USER}:{SQL_PASSWORD}@localhost/postgres" {Fill in those variables with their respective values}
+   DICT_KEY = '' {Sign up for Urban Dictionary at RapidAPI and subscribe } {https://rapidapi.com/community/api/urban-dictionary/details}
+   JOKE_KEY=''   {Sign up for Dad Jokes at RapidAPI and subscribe } {https://rapidapi.com/KegenGuyll/api/dad-jokes/endpoints}
 
 6. Run the following commands to run the app locally:
    //MAKE SURE TO CD INTO THE DIRECTORY WHERE FILES ARE LOCATED
@@ -82,17 +82,17 @@ To use this repository, you must follow these steps:
         heroku login -i
         heroku create
     Navigate to your newly-created heroku site!
-    Add your secret keys (from tweety.env) by going to https://dashboard.heroku.com/apps
+    Add your secret keys (from keys.env) by going to https://dashboard.heroku.com/apps
     and clicking into your app. Click on Settings, then scroll to "Config Vars." Click
     "Reveal Config Vars" and add the key value pairs for each variable in user_tweets.py
     Your config var key names should be:
-        CONS_KEY
-        CONS_SECRET
-        ACCESS_TOK
-        ACCESS_TOK_SEC
-        SPOONACULAR_KEY
+        DATABASE_URL = "postgresql://{SQL_USER}:{SQL_PASSWORD}@localhost/postgres" //Fill in those variables with their respective values
+        DICT_KEY = '' {Sign up for Urban Dictionary at RapidAPI and subscribe } {https://rapidapi.com/community/api/urban-dictionary/details}
+        JOKE_KEY=''   {Sign up for Dad Jokes at RapidAPI and subscribe } {https://rapidapi.com/KegenGuyll/api/dad-jokes/endpoints}
     Configure requirements.txt with all requirements needed to run your app. [pip freeze > requirements.txt]
     Configure Procfile with the command needed to run your app. ["web: python foodtweets.py"]
+   
+    
 8. (GIT Procedure) Go through the following steps:
         git status
         git add requirements.txt
