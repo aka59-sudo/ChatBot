@@ -108,13 +108,14 @@ To use this repository, you must follow these steps:
 +-------------------------------------------------------------------------------------------------------+
                                             PAST ISSUES
                                     
-1. The first technical issue that I came across is finding out how to output the actual tweets from queries.
-   I overcame this issue by going to the documentation to find the type of what is being returned. Once I found
-   that out I looked for methods that would return what I was looking for.
+1. The first technical issue that I came across is finding out how to even operate these functional React Hooks.
+   I overcame this issue by going to the documentation to find out what the specs were for using React Hooks. Once I found
+   that out I made sure to place all of my hooks at the top and not in functions.
 
-2. The second technical issue that I came across occured when trying to output the respective URLs and actually have them 
-   point to the right one. While using Flask and HTML, I overcame this issue by hardcoding the twitter URL into the "<a href>"
-   tag while using Flask to fill in the last part.
+2. The second technical issue that I came across occured when trying to output the respective messages and actually have them 
+   display in sync one. While using SocketIO and React, I overcame this issue by creating a new channel in which I would use to see the
+   chats
+   
  
 3. Another issue that I am currently having is deploying my app to Heroku. I got an error along the lines of "the default language
    can not be detected. I solved this issue by making sure that I had a Procfile and requirements.txt before pushing to heroku master
