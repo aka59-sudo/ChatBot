@@ -130,8 +130,8 @@ To use this repository, you must follow these steps:
 6. I had issues referencing the pictures that I put in my static folder. I was able to solve this by making sure that when I reference pictures 
    I make sure they are referenced from where they are located exactly.
 
-7. I had some issues when trying to use the spoonacular api in reference with the terminolgy. I fixed this issue by making sure that once I had 
-   the api link, I then just added the question mark along with the "api key =" in order to get the authentication working.
+7. I had some issues when trying to use the Dad Jokes API and the terminolgy. I fixed this issue by making sure that once I had 
+   the api link, I then just added the question mark along with the "api key =" in order to get the endpiont working.
 
 +-------------------------------------------------------------------------------------------------------+
                                             CURRENT ISSUES    
@@ -144,15 +144,16 @@ To use this repository, you must follow these steps:
    next to the accounts. I'm thinking about using the tweepy method that gets the url of the image and then using an <img src> 
    tag to display the image from the URL. #WorkInProgress
 
-3. One issue that I know I would've been able to tackle with more time was adding the Spoonacular API and having all the recipe links
-   associated with the query.
+3. One issue that I know I would've been able to tackle with more time was adding the different rooms needed for each user to 
+   contact one another.
    
 +-------------------------------------------------------------------------------------------------------+
                                         FURTHER IMPROVEMENTS
                                         
-1. Some further improvements that I would've liked to accomplish on this project is to have everything be dynamic.
+1. Some further improvements that I would've liked to accomplish on this project is to have cleaner looking code. I felt like there were
+   some ways that I could've cleaned up the code.
 
-2. Another improvement that I would've liked to get on is making sure that users were able to actually search on their
-   own things that they wanted to lookup rather than me hardcoding some variables
+2. Another improvement that I would've liked to get on is making sure that users were able to actually search on their own profiles and histories
+   
    
 3. I would've also liked to have a history tab where users would've been able to see the things that they searched up before
