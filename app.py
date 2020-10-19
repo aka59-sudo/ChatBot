@@ -67,6 +67,10 @@ def bot_call(botfun, request):
         text = "In a {} it looks something like this: {}".format(funtrans["translation"],funtrans["translated"])
         
         botChatCommit(text)
+        
+    elif(botfun == "unknown"):
+        text = "This is not a valid command, use command '!! help' to find out about proper commands." 
+        botChatCommit(text)
     
     elif(botfun == "!! slangcipher "):
         word = request.lstrip("!! slangcipher ")

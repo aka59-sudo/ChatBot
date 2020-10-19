@@ -30,9 +30,9 @@ To use this repository, you must follow these steps:
       f) `npm install socket.io-client --save`    
     :warning: :warning: :warning: If you see any error messages, make sure you use `sudo pip` or `sudo npm`. If it says "pip cannot be found", run `which pip` and use `sudo [path to pip from which pip] install` :warning: :warning: :warning:    
     
-    2.2 If you already have psql set up, **SKIP THE REST OF THE STEPS AND JUST DO THE FOLLOWING COMMAND**:   
+    2.2 If you already have psql set up, **SKIP THE REST OF THE STEPS(2.3 - 2.4) AND JUST DO THE FOLLOWING COMMAND** --> Continue to 3:   
         `sudo service postgresql start`    
-        Copy your `key.env` file into your new directory.
+        Copy your `keys.env` file into your new directory.
     
     2.3 # Getting PSQL to work with Python 
         Update yum: `sudo yum update`, and enter yes to all prompts    
@@ -59,7 +59,7 @@ To use this repository, you must follow these steps:
             b) I recommend 4-5 characters - it doesn't have to be very secure. Remember this password!  
                 `create user [some_username_here] superuser password '[some_unique_new_password_here]';`    
             c) `\q` to quit out of sql    
-3. `cd` into your repository and make a new file called `key.env` and add `SQL_USER=` and `SQL_PASSWORD=` in it  
+3. `cd` into your repository and make a new file called `keys.env` and add `SQL_USER=` and `SQL_PASSWORD=` in it  
     Fill in those values with the values you put in 7. b)  
 
 4. Install flask using the same process as above ([sudo] pip[3] install flask)
