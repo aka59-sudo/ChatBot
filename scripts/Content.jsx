@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 import { Button } from './Button';
-import { Socket } from './Socket';
+import { Socket } from './GoogleButton';
 import { isBot } from './Bot';
 
 export function Content() {
@@ -56,6 +56,40 @@ export function Content() {
         setUserID(data['allUserID'])
     }
     
+    
+    function checkPIC(url) {
+        return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+    }
+    
+    function validURL(str) {
+      var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+      return !!pattern.test(str);
+    }
+    
+    function giveHTML(message, index) {
+        console.log(checkPIC(message) + ' is an image url')
+        console.log(validURL(message) + ' is a regular URL')
+        if(checkPIC(message)){
+            return( <li id={ userID[index] } key={ index }>{userID[index]}: <b><img src={ message }/></b></li>)
+        }else if(validURL(message)){
+            if(message.startsWith("http")){
+                 return( <li id={ userID[index] } key={ index }>{userID[index]}: <b><a href={ message }>{ message }</a></b></li>)
+            }
+            else{
+                return( <li id={ userID[index] } key={ index }>{userID[index]}: <b><a href={'https://' + message }>{ message }</a></b></li>)
+            }
+        }else{
+            return( <li id={ userID[index] } key={ index }>{userID[index]}: <b>{ message }</b></li>)
+        }
+    }
+        
+        
+        
     Bot();
     getNewMessages();
     numConnections();
@@ -67,8 +101,8 @@ export function Content() {
             <h3>Connected Users: {connections}</h3>
                 <ol id="myList">
                     {   
-                        messages.map(
-                        (message, index) => <li id={ userID[index] } key={ index }>{userID[index]}: <b>{ message }</b></li>)
+                        messages.map((message, index) => giveHTML(message, index))
+                        
                     }
                 </ol>
             <Button />

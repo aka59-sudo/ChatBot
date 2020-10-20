@@ -26,3 +26,9 @@ li{
 [id="Chat Bot (C.B.)"]{
   color: firebrick;
 }
+
+img{
+  width: 75%;
+  object-fit: cover;
+  border-radius: 8px;
+}

@@ -55,7 +55,7 @@ def connections(value):
 def bot_call(botfun, request):
     text = ''
     if(botfun == "!! funtranslate "):
-        request = request.lstrip("!! funtranslate")
+        request = request.replace("!! funtranslate","")
         request = request.replace(" ","%20")
 
         url = "https://api.funtranslations.com/translate/southern-accent.json?text={}".format(request)
@@ -73,7 +73,7 @@ def bot_call(botfun, request):
         botChatCommit(text)
     
     elif(botfun == "!! slangcipher "):
-        word = request.lstrip("!! slangcipher ")
+        word = request.replace("!! slangcipher ","")
         
         url = "https://rapidapi.p.rapidapi.com/define"
 

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Socket } from './Socket';
+import { Socket } from './GoogleButton';
+import { googName } from './GoogleButton'
 
 
 
@@ -8,7 +9,7 @@ function handleSubmit(event) {
     // TODO send the address on socket to server
     Socket.emit('new message input', {
         "message": newMessage.value,
-        "userID": Socket.io.engine.id,
+        "userID": googName,
     });
     console.log('Sent the message ' + newMessage.value + ' to server!');
     newMessage.value = ''
