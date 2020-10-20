@@ -76,21 +76,40 @@ To use this repository, you must follow these steps:
    //A preview should be available on your localhost
    
 
-7. Sign up for heroku at heroku.com 
-    Install heroku by running npm install -g heroku
-    Go through the following steps:
+7. (Heroku Procedure)Sign up for heroku at heroku.com 
+        Install heroku by running npm install -g heroku
+        Go through the following steps:
         heroku login -i
         heroku create
-    Navigate to your newly-created heroku site!
-    Add your secret keys (from keys.env) by going to https://dashboard.heroku.com/apps
-    and clicking into your app. Click on Settings, then scroll to "Config Vars." Click
-    "Reveal Config Vars" and add the key value pairs for each variable in user_tweets.py
-    Your config var key names should be:
-        DATABASE_URL = "postgresql://{SQL_USER}:{SQL_PASSWORD}@localhost/postgres" //Fill in those variables with their respective values
-        DICT_KEY = '' {Sign up for Urban Dictionary at RapidAPI and subscribe } {https://rapidapi.com/community/api/urban-dictionary/details}
-        JOKE_KEY=''   {Sign up for Dad Jokes at RapidAPI and subscribe } {https://rapidapi.com/KegenGuyll/api/dad-jokes/endpoints}
-    Configure requirements.txt with all requirements needed to run your app. [pip freeze > requirements.txt]
-    Configure Procfile with the command needed to run your app. ["web: python foodtweets.py"]
+        
+        #Pushing Database to Heroku
+        7.1 Follow these commands
+            a) heroku addons:create heroku-postgresql:hobby-dev
+            b) heroku pg:wait
+            c) PGUSER=<Postgres Username in keys.env> heroku pg:push postgres DATABASE_URL
+                -> Enter Password when prompted
+                -> It is ok if there's an exit with an error of 1
+        
+        #Check whether database in Heroku psql
+        7.2 Follow these commands
+            a) heroku pg:psql
+            b) select * from <table name>;
+            
+    
+        #Adding Keys
+        7.3 Navigate to your newly-created heroku site!
+            a)Add your secret keys (from keys.env) by going to https://dashboard.heroku.com/apps
+              and clicking into your app. Click on Settings, then scroll to "Config Vars." Click
+              "Reveal Config Vars" and add the key value pairs for each variable in app.py
+              
+            b)Your config var key names should be:
+              DATABASE_URL = "postgresql://{SQL_USER}:{SQL_PASSWORD}@localhost/postgres" //Fill in those variables with their respective values
+              DICT_KEY = '' {Sign up for Urban Dictionary at RapidAPI and subscribe } {https://rapidapi.com/community/api/urban-dictionary/details}
+              JOKE_KEY=''   {Sign up for Dad Jokes at RapidAPI and subscribe } {https://rapidapi.com/KegenGuyll/api/dad-jokes/endpoints}
+    
+        #Setting up Procfile
+        7.4 Configure requirements.txt with all requirements needed to run your app. [pip freeze > requirements.txt]
+        7.5 Configure Procfile with the command needed to run your app. ["web: python foodtweets.py"]
    
     
 8. (GIT Procedure) Go through the following steps:
@@ -99,9 +118,12 @@ To use this repository, you must follow these steps:
         git add Procfile
         git status [Check whether all files have been staged]
         git commit -m "["Include meaningful message here"]"
-        git pull origin master
         git push origin master
         git push heroku master
+            a) If there is a build failure, enter the following code
+            --> heroku plugins:install heroku-builds
+            --> heroku builds:cancel -a <Your app name (fancy-name-####)>
+            --> Try git push heroku master again :)
 9. Go to your Heroku URL and Voila!
 10. If you are still having issues, you may use heroku logs --tail to see what's wrong.
 
@@ -114,8 +136,7 @@ To use this repository, you must follow these steps:
 
 2. The second technical issue that I came across occured when trying to output the respective messages and actually have them 
    display in sync one. While using SocketIO and React, I overcame this issue by creating a new channel in which I would use to see the
-   chats
-   
+   chats 
  
 3. Another issue that I am currently having is deploying my app to Heroku. I got an error along the lines of "something is wrong with the buildpack.
    I solved this issue by referring back to the lecture to find out that I had to kill the current build and restart it again.
@@ -140,9 +161,8 @@ To use this repository, you must follow these steps:
    into different documentation that might help me achieve what I'm looking for. I want the borders to rotate around the edges
    of the li tags so I've been watching many videos regarding that. 
 
-2. The second issue that I came across that I'm still trying to figure out is how to have the image of each user appear
-   next to the accounts. I'm thinking about using the tweepy method that gets the url of the image and then using an <img src> 
-   tag to display the image from the URL. #WorkInProgress
+2. The second issue that I came across that I'm still trying to figure out is how to have the <li> tags appear on the right side of the current user
+   and have the left side display the users that aren't the current one. 
 
 3. One issue that I know I would've been able to tackle with more time was adding the different rooms needed for each user to 
    contact one another.
@@ -154,6 +174,9 @@ To use this repository, you must follow these steps:
    some ways that I could've cleaned up the code.
 
 2. Another improvement that I would've liked to get on is making sure that users were able to actually search on their own profiles and histories
+  
+3. I would also like to have the user be able to add friends as they wish and private message them in their own chats. 
+
+4. I want to also add the functionality of having live previews of links as well. Images were easier than the links. I'm still looking into how I can do that 
+   for the links
    
-   
-3. I would've also liked to have a history tab where users would've been able to see the things that they searched up before
