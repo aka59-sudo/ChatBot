@@ -40,7 +40,8 @@ db.session.commit()
 connects = 0
 
 def botChatCommit(text):
-    db.session.add(models.Chats("Chat Bot (C.B.)", text));
+    picLink = 'https://cdn.pixabay.com/photo/2015/06/12/18/31/cute-807306__480.png'
+    db.session.add(models.newChats("Chat Bot (C.B.)", text, picLink));
     db.session.commit();
 
 def connections(value):
@@ -142,17 +143,24 @@ def bot_call(botfun, request):
 def emit_all_messages(channel):
     all_userID = [ \
         db_message.userID for db_message in \
-        db.session.query(models.Chats).all()
+        db.session.query(models.newChats).all()
     ]
     
     all_messages = [ \
         db_message.message for db_message in \
-        db.session.query(models.Chats).all()
+        db.session.query(models.newChats).all()
     ]
+    
+    all_userPics = [ \
+        db_message.profilePic for db_message in \
+        db.session.query(models.newChats).all()
+    ]
+    
     
     socketio.emit(channel, {
         "allMessages": all_messages, 
-        "allUserID": all_userID
+        "allUserID": all_userID,
+        "allPics": all_userPics
     })
 
 @socketio.on('connect')
@@ -179,7 +187,7 @@ def on_disconnect():
 @socketio.on('new message input')
 def on_new_message(data):
     print("Got an event for new message input with data:", data)
-    db.session.add(models.Chats(data["userID"],data["message"]));
+    db.session.add(models.newChats(data["userID"],data["message"],data["userPic"]));
     db.session.commit();
     botCalls =["!! funtranslate ", "!! slangcipher "]
     regbotCall = ["!! about", "!! help", "!! joke"]

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Socket } from './GoogleButton';
 import { googName } from './GoogleButton'
-
+import { profilePic } from './GoogleButton';
 
 
 function handleSubmit(event) {
@@ -10,6 +10,7 @@ function handleSubmit(event) {
     Socket.emit('new message input', {
         "message": newMessage.value,
         "userID": googName,
+        "userPic": profilePic
     });
     console.log('Sent the message ' + newMessage.value + ' to server!');
     newMessage.value = ''

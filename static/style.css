@@ -32,3 +32,9 @@ img{
   object-fit: cover;
   border-radius: 8px;
 }
+
+#profPic{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}

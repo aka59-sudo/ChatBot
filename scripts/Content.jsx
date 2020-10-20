@@ -4,12 +4,14 @@ import * as React from 'react';
 import { Button } from './Button';
 import { Socket } from './GoogleButton';
 import { isBot } from './Bot';
+import { profilePic } from './GoogleButton';
 
 export function Content() {
     const [botMess, setBotMess] = React.useState('')
     const [connections, setConnections] = React.useState(0);
     const [messages, setMessages] = React.useState([]);
     const [userID, setUserID] = React.useState([]);
+    const [userPic, setUserPic] = React.useState([]);
     
     
     function Bot() {
@@ -54,6 +56,7 @@ export function Content() {
         console.log("Received messages from server: " + data['allMessages']);
         setMessages(data['allMessages']);
         setUserID(data['allUserID'])
+        setUserPic(data['allPics'])
     }
     
     
@@ -72,19 +75,17 @@ export function Content() {
     }
     
     function giveHTML(message, index) {
-        console.log(checkPIC(message) + ' is an image url')
-        console.log(validURL(message) + ' is a regular URL')
         if(checkPIC(message)){
-            return( <li id={ userID[index] } key={ index }>{userID[index]}: <b><img src={ message }/></b></li>)
+            return( <li id={ userID[index] } key={ index }><img src={ userPic[index] } id="profPic"/>{userID[index]}: <b><img src={ message }/></b></li>)
         }else if(validURL(message)){
             if(message.startsWith("http")){
-                 return( <li id={ userID[index] } key={ index }>{userID[index]}: <b><a href={ message }>{ message }</a></b></li>)
+                 return( <li id={ userID[index] } key={ index }><img src={ userPic[index] } id="profPic"/>{userID[index]}: <b><a href={ message }>{ message }</a></b></li>)
             }
             else{
-                return( <li id={ userID[index] } key={ index }>{userID[index]}: <b><a href={'https://' + message }>{ message }</a></b></li>)
+                return( <li id={ userID[index] } key={ index }><img src={ userPic[index] } id="profPic"/>{userID[index]}: <b><a href={'https://' + message }>{ message }</a></b></li>)
             }
         }else{
-            return( <li id={ userID[index] } key={ index }>{userID[index]}: <b>{ message }</b></li>)
+            return( <li id={ userID[index] } key={ index }><img src={ userPic[index] } id="profPic"/>{userID[index]}: <b>{ message }</b></li>)
         }
     }
         

@@ -15,7 +15,7 @@ const responseGoogle = (response) => {
 function handleSubmit(response) {
     console.log(response.profileObj.name + 'handlerrrr');
     googName = response.profileObj.name
-    profilePic = 
+    profilePic = response.profileObj.imageUrl
     // TODO replace with name from oauth
     Socket = SocketIO.connect();
     ReactDOM.render(<Content />, document.getElementById('content'));
