@@ -10,7 +10,7 @@ ol{
     border-radius: 25px;
     text-align: center;
     overflow:hidden; 
-    overflow-y:scroll;
+    overflow-y:auto;
     height:500px; 
     width:80%;
 }

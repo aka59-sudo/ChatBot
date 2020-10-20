@@ -89,12 +89,18 @@ export function Content() {
         }
     }
         
-        
+    function scroll(){
+        var objDiv = document.getElementById("myList");
+        if(objDiv == null){
+            return   
+        }
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
         
     Bot();
     getNewMessages();
     numConnections();
-    
+    scroll()
 
     return (
         <div>
