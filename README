@@ -68,6 +68,24 @@ To use this repository, you must follow these steps:
    DATABASE_URL = "postgresql://{SQL_USER}:{SQL_PASSWORD}@localhost/postgres" {Fill in those variables with their respective values}
    DICT_KEY = '' {Sign up for Urban Dictionary at RapidAPI and subscribe } {https://rapidapi.com/community/api/urban-dictionary/details}
    JOKE_KEY=''   {Sign up for Dad Jokes at RapidAPI and subscribe } {https://rapidapi.com/KegenGuyll/api/dad-jokes/endpoints}
+   
+6. # Google OAuth
+    6.1 #Setting up Google OAuth on Google
+        a) Go to https://console.developers.google.com/ and sign up using your PERSONAL google account.
+        b) Click "CREATE PROJECT" or in the dropdown menu called "Select a Project" in the top, click "NEW PROJECT".
+        c) Make a new project and name it whatever you want. "No organization" is fine.
+        d) Click "Credentials" in the left hand bar, then click "+ CREATE CREDENTIALS" and then click "OAuth client ID".
+            # If you see a warning that says "To create an OAuth client ID, you must first set a product name on the consent screen", do the following steps:
+            1. Click the "CONFIGURE CONSENT SCREEN" button.
+            2. Choose "External"
+            3. For "Application name," specify a suitable name.
+            4. Press save.
+            5. Go back to Credentials -> Create Credentials -> OAuth client ID. Click "web application".
+            6. Change the App ID in scripts/GoogleButton.jsx
+            
+    6.2 #Setting up Google OAuth React
+        a) Run the following: 'npm install react-google-login'
+        b) Everything related to Google OAuth and React --> https://www.npmjs.com/package/react-google-login
 
 6. Run the following commands to run the app locally:
    //MAKE SURE TO CD INTO THE DIRECTORY WHERE FILES ARE LOCATED
@@ -153,6 +171,13 @@ To use this repository, you must follow these steps:
 
 7. I had some issues when trying to use the Dad Jokes API and the terminolgy. I fixed this issue by making sure that once I had 
    the api link, I then just added the question mark along with the "api key =" in order to get the endpiont working.
+   
+8. I had issues using the google OAuth because I was getting a 400 Error. I then realized that the Flask app was actually using port 8080 to render
+   the html files. So in order to account for that I had to add the ':8080' after the given url in order to make sure I'm referencing the correct url
+   and port
+   
+   
+   
 
 +-------------------------------------------------------------------------------------------------------+
                                             CURRENT ISSUES    
@@ -164,8 +189,7 @@ To use this repository, you must follow these steps:
 2. The second issue that I came across that I'm still trying to figure out is how to have the <li> tags appear on the right side of the current user
    and have the left side display the users that aren't the current one. 
 
-3. One issue that I know I would've been able to tackle with more time was adding the different rooms needed for each user to 
-   contact one another.
+3. Another issue that I'm having is seamlessly having the app take in differenet login buttons in order to allow the sign in.
    
 +-------------------------------------------------------------------------------------------------------+
                                         FURTHER IMPROVEMENTS
